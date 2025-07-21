@@ -1,0 +1,1 @@
+query   db  pct_identity    length  mismatches  gap_opens   q_start q_end   s_start s_end   evalue  bitscore
