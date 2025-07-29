@@ -1,0 +1,6 @@
+GCA_001676355.1_B_61.contig_genomic
+GCA_031216515.1_ASM3121651v1_genomic
+GCA_040583845.1_WUR_Evul_1.0_genomic
+GCA_047372445.1_NJ_Pyou_V1_genomic
+GCA_949628265.1_ieCloDipt1.1_genomic
+GCA_965282545.1_ieProBifi2.1_genomic

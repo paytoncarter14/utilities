@@ -71,7 +71,13 @@ with psycopg.connect(conn_string, row_factory=psycopg.rows.dict_row) as conn:
     # then get sequences and filter them for kmer coverage
     # finally filter samples to make sure they have the min num of loci
     # order by locus to stream directly to file
-    query = '''
+    # if args.include_outgroups is true, also throw in the Ephemeroptera samples (GCA_...)
+
+    outgroups_clause = ""
+    if args.include_outgroups:
+        outgroups_clause = "OR r.name LIKE 'GCA_%%'" 
+
+    query = f'''
     SELECT
         r.name AS sample,
         l.name AS locus,
@@ -96,6 +102,7 @@ with psycopg.connect(conn_string, row_factory=psycopg.rows.dict_row) as conn:
         )
         WHERE locus_count >= %(locus_count)s
     )
+    {outgroups_clause}
     ORDER BY locus ASC
     '''
     result = conn.execute(query, {'assembly_kmer_coverage': args.min_avg_kmer_coverage, 'kmer_coverage': args.min_locus_kmer_coverage, 'locus_count': args.min_num_loci}).fetchall()
